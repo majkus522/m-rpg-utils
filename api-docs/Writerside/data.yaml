@@ -308,6 +308,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /password-recovery:
+    get:
+      summary: Send recovery email
+      description: Sends password recovery email to player.
+      parameters:
+        -   name: username
+            in: query
+            description: Players username
+            required: true
+            schema:
+              type: string
+        -   name: password
+            in: query
+            description: Players email
+            required: true
+            schema:
+              type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Enter username or email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Player doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /password-recovery/{$code}:
+    patch:
+      summary: Set players new password
+      description: Sets a new password for users who have forgotten it.
+      parameters:
+        -   name: code
+            in: path
+            description: Password recovery code
+            required: true
+            schema:
+              type: string
+      requestBody:
+        description: New password.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestPasswordRecovery'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   schemas:
     responsePlayerSimple:
@@ -369,6 +428,12 @@ components:
           type: string
         email:
           type: string
+    requestPasswordRecovery:
+      type: object
+      properties:
+        password:
+          type: string
+          example: "new password"
     error:
       properties:
         message:
