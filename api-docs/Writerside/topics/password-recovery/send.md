@@ -1,5 +1,7 @@
 # Send recovery email
 
+<highlight>Send recovery email</highlight>
+
 <note>
 	Only one of the Query parameters is required.
 </note>

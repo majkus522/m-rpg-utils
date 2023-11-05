@@ -1,17 +1,23 @@
 # Set players new password
 
+<highlight>Set players new password</highlight>
+
 <include from="notes.md" element-id="urlVariable"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/password-recovery/{$code}" method="PATCH">
 	<response type="400">
 		<sample src="error.json"/>
 	</response>
+	<response type="404">
+		<sample lang="JSON">
+			{
+				"message": "Link expired"
+			}
+		</sample>
+	</response>
 </api-endpoint>
 
 ## Possible errors - 400
-<list>
-	<li>Link expired</li>
-</list>
 <deflist collapsible="true">
 	<def title="Password errors">
 		<list>
