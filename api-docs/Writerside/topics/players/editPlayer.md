@@ -17,9 +17,15 @@
 ## Possible errors - 400
 <list>
 	<li>Enter some changes</li>
-	<li>Email already taken</li>
 </list>
-<deflist collapsible="true">
+<deflist collapsible="true" default-state="collapsed">
+	<def title="Email errors">
+		<list>
+			<li>Enter email</li>
+			<li>Email already taken</li>
+			<li>Incorrect email</li>
+		</list>
+	</def>
 	<def title="Password errors">
 		<list>
 			<li>Enter password</li>

@@ -2,7 +2,7 @@
 
 <highlight>Send recovery email</highlight>
 
-<note>
+<note title="Query">
 	Only one of the Query parameters is required.
 </note>
 

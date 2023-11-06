@@ -15,7 +15,7 @@
 </api-endpoint>
 
 ## Possible errors - 400
-<deflist collapsible="true">
+<deflist collapsible="true" default-state="collapsed">
 	<def title="Username errors">
 		<list>
 			<li>Enter username</li>

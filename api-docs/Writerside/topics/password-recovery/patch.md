@@ -18,7 +18,7 @@
 </api-endpoint>
 
 ## Possible errors - 400
-<deflist collapsible="true">
+<deflist collapsible="true" default-state="collapsed">
 	<def title="Password errors">
 		<list>
 			<li>Enter password</li>

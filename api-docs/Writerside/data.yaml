@@ -53,18 +53,16 @@ paths:
               - warrior
         - name: Items-Count
           in: header
-          description: Maximal number of objects returned
+          description: "Maximal number of objects returned. Default: 50."
           required: false
           schema:
             type: int
-            format: "Default: 50"
         - name: Items-Offset
           in: header
-          description: Offset of objects
+          description: "Offset of returned objects. Default: 0."
           required: false
           schema:
             type: int
-            format: "Default: 0"
       responses:
         '206':
           description: Successful operation

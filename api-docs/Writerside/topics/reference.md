@@ -2,7 +2,7 @@
 
 ## Available endpoints
 
-<deflist collapsible="true">
+<deflist collapsible="true" default-state="collapsed">
     <def title="Players">
 		<list>
 	        <li><a href="getAllPlayers.md">Get all players</a></li>
