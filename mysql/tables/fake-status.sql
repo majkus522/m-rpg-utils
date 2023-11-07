@@ -13,9 +13,5 @@ CREATE TABLE `fake-status`
   `vtl` int(11) NOT NULL DEFAULT 0,
   `dex` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`player`) REFERENCES `players`(id) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
-ALTER TABLE `fake-status` AUTO_INCREMENT=0;

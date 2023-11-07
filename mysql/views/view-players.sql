@@ -1,4 +1,4 @@
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view-players` AS SELECT
+CREATE VIEW `view-players` AS SELECT
     `players`.`id` AS `id`,
     `players`.`username` AS `username`,
     `players`.`email` AS `email`,

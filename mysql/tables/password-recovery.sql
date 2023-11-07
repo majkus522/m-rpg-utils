@@ -5,7 +5,5 @@ CREATE TABLE `password-recovery`
   `code` text NOT NULL,
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`player`) REFERENCES `players`(id) 
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

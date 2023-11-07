@@ -1,9 +1,9 @@
 CREATE TABLE `players`
 (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` text NOT NULL,
-  `email` text NOT NULL,
-  `password` longtext NOT NULL,
+  `username` varchar(16) NOT NULL,
+  `email` varchar(320) NOT NULL,
+  `password` text NOT NULL,
   `level` int(11) NOT NULL DEFAULT 1,
   `exp` int(11) NOT NULL DEFAULT 0,
   `money` float NOT NULL DEFAULT 0,
@@ -17,5 +17,3 @@ CREATE TABLE `players`
   `dex` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 );
-
-ALTER TABLE `players` AUTO_INCREMENT=0;
