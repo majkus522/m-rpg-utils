@@ -14,6 +14,13 @@
 	        <li><a href="deletePlayer.md">Delete player</a></li>
         </list>
 	</def>
+	<def title="Skills">
+		<list>
+	        <li><a href="getSkills.md">Get player skills</a></li>
+	        <li><a href="checkSkill.md">Check if player has skill</a></li>
+	        <li><a href="toggleSkill.md">Toggle players skill</a></li>
+        </list>
+	</def>
 	<def title="Password recovery">
 		<list>
 	        <li><a href="send.md">Send recovery email</a></li>
