@@ -27,6 +27,6 @@
 
 ## Possible errors - 404
 <list>
-	<li>Can't find any skills matching conditions</li>
 	<li>Player doesn't exists</li>
+	<li>Can't find any skills matching conditions</li>
 </list>

@@ -548,6 +548,139 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /fake-status/${username}:
+    get:
+      summary: Get players fake status
+      description: Get players fake status.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseFakeStatus'
+        '404':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    post:
+      summary: Create fake status for player
+      description: Create fake status for player.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        description: Data for fake status
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestFakeStatus'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    patch:
+      summary: Create fake status for player
+      description: Create fake status for player.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        description: Data for fake status
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestFakeStatus'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   schemas:
     responsePlayersSimple:
@@ -615,6 +748,33 @@ components:
           type: string
         email:
           type: string
+    responseFakeStatus:
+      type: object
+      properties:
+        id:
+          type: int
+        player:
+          type: int
+        level:
+          type: int
+        money:
+          type: float
+        clazz:
+          type: string
+        str:
+          type: int
+        agl:
+          type: int
+        chr:
+          type: int
+        intl:
+          type: int
+        def:
+          type: int
+        vtl:
+          type: int
+        dex:
+          type: int
     requestPlayer:
       type: object
       properties:
@@ -637,6 +797,36 @@ components:
         password:
           type: string
           example: "new password"
+    requestFakeStatus:
+      type: object
+      properties:
+        level:
+          type: int
+        money:
+          type: float
+        clazz:
+          type: string
+          enum:
+            - archer
+            - mage
+            - sorcerer
+            - tank
+            - warlock
+            - warrior
+        str:
+          type: int
+        agl:
+          type: int
+        chr:
+          type: int
+        intl:
+          type: int
+        def:
+          type: int
+        vtl:
+          type: int
+        dex:
+          type: int
     error:
       type: object
       properties:

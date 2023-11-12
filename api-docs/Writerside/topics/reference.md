@@ -21,6 +21,13 @@
 	        <li><a href="toggleSkill.md">Toggle players skill</a></li>
         </list>
 	</def>
+	<def title="Skills">
+		<list>
+	        <li><a href="getFakeStatus.md">Get player fake status</a></li>
+	        <li><a href="postFakeStatus.md">Create fake status</a></li>
+	        <li><a href="patchFakeStatus.md">Edit player fake status</a></li>
+        </list>
+	</def>
 	<def title="Password recovery">
 		<list>
 	        <li><a href="send.md">Send recovery email</a></li>

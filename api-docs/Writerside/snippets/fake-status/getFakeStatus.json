@@ -1,0 +1,14 @@
+{
+	"id": 1,
+	"player": 1,
+	"level": 8,
+	"money": 9900,
+	"clazz": "warlock",
+	"str": 19,
+	"agl": 109,
+	"chr": 90,
+	"intl": 50,
+	"def": 0,
+	"vtl": 30,
+	"dex": 100
+}
