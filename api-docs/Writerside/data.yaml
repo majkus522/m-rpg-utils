@@ -48,12 +48,12 @@ paths:
               - tank
               - warlock
               - warrior
-        - name: Items-Count
+        - name: Result-Count
           in: header
           description: "Maximal number of objects returned. Default: 50."
           schema:
             type: int
-        - name: Items-Offset
+        - name: Result-Offset
           in: header
           description: "Offset of returned objects. Default: 0."
           schema:
@@ -62,7 +62,7 @@ paths:
         '206':
           description: Successful operation
           headers:
-            Result-Count:
+            Return-Count:
               description: Number of objects returned.
               schema:
                 type: int
@@ -389,12 +389,12 @@ paths:
           required: true
           schema:
             type: int
-        - name: Items-Count
+        - name: Result-Count
           in: header
           description: "Maximal number of objects returned. Default: 50."
           schema:
             type: int
-        - name: Items-Offset
+        - name: Result-Offset
           in: header
           description: "Offset of returned objects. Default: 0."
           schema:
@@ -434,7 +434,7 @@ paths:
         '200':
           description: Successful operation
           headers:
-            Result-Count:
+            Return-Count:
               description: Number of objects returned.
               schema:
                 type: int
