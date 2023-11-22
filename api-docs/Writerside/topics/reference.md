@@ -1,5 +1,13 @@
 # API Reference
 
+## Method - HEAD
+
+<p>All endpoints have an HTTP HEAD method available, which will return the same content as the corresponding GET method, but without the content body.</p>
+
+## Method - OPTIONS
+
+<p>All endpoints have an HTTP OPTIONS method available, which will return all URLs for the specified endpoints.</p>
+
 ## Available endpoints
 
 <deflist collapsible="true" default-state="collapsed">
