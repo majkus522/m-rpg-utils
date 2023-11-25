@@ -12,5 +12,7 @@ CREATE VIEW `view-players` AS SELECT
     `players`.`intl` AS `intl`,
     `players`.`def` AS `def`,
     `players`.`vtl` AS `vtl`,
-    `players`.`dex` AS `dex`
-FROM `players`;
+    `players`.`dex` AS `dex`,
+    `guilds`.`slug` AS `guild`
+FROM `players`
+LEFT JOIN `guilds` ON `guilds`.`id` = `players`.`guild`

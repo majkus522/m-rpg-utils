@@ -15,5 +15,7 @@ CREATE TABLE `players`
   `def` int(11) NOT NULL DEFAULT 1,
   `vtl` int(11) NOT NULL DEFAULT 1,
   `dex` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id`)
+  `guild` int(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`guild`) REFERENCES `guilds`(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
