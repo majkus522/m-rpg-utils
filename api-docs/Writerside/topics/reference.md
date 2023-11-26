@@ -36,6 +36,14 @@
 	        <li><a href="patchFakeStatus.md">Edit player fake status</a></li>
         </list>
 	</def>
+	<def title="Guilds">
+		<list>
+	        <li><a href="getGuilds.md">Get all guilds</a></li>
+	        <li><a href="getGuildSingle.md">Get guild</a></li>
+	        <li><a href="postGuild.md">Create guild</a></li>
+	        <li><a href="deleteGuild.md">Delete guild</a></li>
+        </list>
+	</def>
 	<def title="Password recovery">
 		<list>
 	        <li><a href="send.md">Send recovery email</a></li>

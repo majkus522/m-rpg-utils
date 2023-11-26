@@ -681,6 +681,119 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /guilds:
+    get:
+      summary: Get all guilds
+      description: Get all guilds.
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseGuilds'
+    post:
+      summary: Create guild
+      description: Create own guild.
+      parameters:
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestGuild'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /guilds/{$slug}:
+    get:
+      summary: Get guild
+      description: Get guild by its slug.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseGuildSingle'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    delete:
+      summary: Delete guild
+      description: Delete guild.
+      parameters:
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Enter guilds name
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   schemas:
     responsePlayersSimple:
@@ -775,6 +888,30 @@ components:
           type: int
         dex:
           type: int
+    responseGuilds:
+      type: array
+      items:
+        type: object
+      properties:
+        id:
+          type: int
+        name:
+          type: string
+        slug:
+          type: string
+        leader:
+          type: int
+    responseGuildSingle:
+      type: object
+      properties:
+        id:
+          type: int
+        name:
+          type: string
+        slug:
+          type: string
+        leader:
+          type: int
     requestPlayer:
       type: object
       properties:
@@ -827,6 +964,15 @@ components:
           type: int
         dex:
           type: int
+    requestGuild:
+      type: object
+      properties:
+        name:
+          type: string
+          example: name3
+        leader:
+          type: string
+          example: username3
     error:
       type: object
       properties:

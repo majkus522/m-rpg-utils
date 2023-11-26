@@ -21,6 +21,12 @@
             <toc-element topic="postFakeStatus.md"/>
             <toc-element topic="patchFakeStatus.md"/>
         </toc-element>
+        <toc-element toc-title="Guilds">
+            <toc-element topic="getGuilds.md"/>
+            <toc-element topic="getGuildSingle.md"/>
+            <toc-element topic="postGuild.md"/>
+            <toc-element topic="deleteGuild.md"/>
+        </toc-element>
         <toc-element toc-title="Password recovery">
             <toc-element topic="send.md"/>
             <toc-element topic="patch.md"/>
