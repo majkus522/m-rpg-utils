@@ -16,6 +16,7 @@
 
 ## Possible errors - 400
 <list>
+	<li>Enter player</li>
 	<li>Enter some changes</li>
 </list>
 <deflist collapsible="true" default-state="collapsed">
