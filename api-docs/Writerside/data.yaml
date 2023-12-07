@@ -298,23 +298,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /players/{$username}/leave:
+    patch:
+      summary: Leave guild
+      description: Leave your guild.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
   /password-recovery:
     get:
       summary: Send recovery email
       description: Sends password recovery email to player.
       parameters:
-        -   name: username
-            in: query
-            description: Players username
-            required: true
-            schema:
-              type: string
-        -   name: password
-            in: query
-            description: Players email
-            required: true
-            schema:
-              type: string
+        - name: username
+          in: query
+          description: Players username
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: Players email
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: Successful operation
@@ -335,12 +370,12 @@ paths:
       summary: Set players new password
       description: Sets a new password for users who have forgotten it.
       parameters:
-        -   name: code
-            in: path
-            description: Password recovery code
-            required: true
-            schema:
-              type: string
+        - name: code
+          in: path
+          description: Password recovery code
+          required: true
+          schema:
+            type: string
       requestBody:
         description: New password.
         required: true
@@ -794,6 +829,150 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
+  /guilds/{$slug}/members:
+    get:
+      summary: Get guild members
+      description: Get guild members. You must be a part of the guild.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseGuildMembers'
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+        '400':
+          description: You are not part of this guild
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /guilds/{$slug}/add:
+    patch:
+      summary: Add player to guild
+      description: Add player to guild. Only leader can do this.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          username:
+            schema:
+              $ref: '#/components/schemas/requestAddPlayer'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /guilds/{$slug}/kick:
+    patch:
+      summary: Kick player from guild
+      description: Kick player from guild. Only leader can do this.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            type: string
+            enum:
+              - website
+              - game
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          username:
+            schema:
+              $ref: '#/components/schemas/requestAddPlayer'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
 components:
   schemas:
     responsePlayersSimple:
@@ -912,6 +1091,10 @@ components:
           type: string
         leader:
           type: int
+    responseGuildMembers:
+      type: array
+      items:
+        type: string
     requestPlayer:
       type: object
       properties:
@@ -973,6 +1156,8 @@ components:
         leader:
           type: string
           example: username3
+    requestAddPlayer:
+      type: string
     error:
       type: object
       properties:

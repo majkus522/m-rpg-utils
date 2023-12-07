@@ -19,6 +19,7 @@
 	        <li><a href="checkPlayerSession.md">Check player session</a></li>
 	        <li><a href="createPlayer.md">Create new player</a></li>
 	        <li><a href="editPlayer.md">Edit player data</a></li>
+	        <li><a href="leaveGuild.md">Leave guild</a></li>
 	        <li><a href="deletePlayer.md">Delete player</a></li>
         </list>
 	</def>
@@ -41,6 +42,8 @@
 	        <li><a href="getGuilds.md">Get all guilds</a></li>
 	        <li><a href="getGuildSingle.md">Get guild</a></li>
 	        <li><a href="postGuild.md">Create guild</a></li>
+	        <li><a href="addPlayer.md">Add player to guild</a></li>
+	        <li><a href="kickPlayer.md">Kick player from guild</a></li>
 	        <li><a href="deleteGuild.md">Delete guild</a></li>
         </list>
 	</def>

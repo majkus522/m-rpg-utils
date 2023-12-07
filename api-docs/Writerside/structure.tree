@@ -9,6 +9,7 @@
             <toc-element topic="checkPlayerSession.md"/>
             <toc-element topic="createPlayer.md"/>
             <toc-element topic="editPlayer.md"/>
+            <toc-element topic="leaveGuild.md"/>
             <toc-element topic="deletePlayer.md"/>
         </toc-element>
         <toc-element toc-title="Skills">
@@ -24,7 +25,10 @@
         <toc-element toc-title="Guilds">
             <toc-element topic="getGuilds.md"/>
             <toc-element topic="getGuildSingle.md"/>
+            <toc-element topic="getMembers.md"/>
             <toc-element topic="postGuild.md"/>
+            <toc-element topic="addPlayer.md"/>
+            <toc-element topic="kickPlayer.md"/>
             <toc-element topic="deleteGuild.md"/>
         </toc-element>
         <toc-element toc-title="Password recovery">
