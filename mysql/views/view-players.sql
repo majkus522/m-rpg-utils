@@ -15,4 +15,4 @@ CREATE VIEW `view-players` AS SELECT
     `players`.`dex` AS `dex`,
     `guilds`.`slug` AS `guild`
 FROM `players`
-LEFT JOIN `guilds` ON `guilds`.`id` = `players`.`guild`
+LEFT JOIN `guilds` ON `guilds`.`id` = `players`.`guild`;

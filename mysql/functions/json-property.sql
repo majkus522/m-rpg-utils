@@ -4,4 +4,4 @@ CREATE DEFINER=`root`@`localhost` FUNCTION `json_property`(`root` TEXT CHARSET u
 begin
     return replace(json_extract(convert(LOAD_FILE(concat(root, "/", file, ".json")) using utf8mb4), concat("$.", property)), '"', "");
 end$$
-DELIMITER ;
+DELIMITER;

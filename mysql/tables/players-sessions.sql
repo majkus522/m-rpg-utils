@@ -1,7 +1,7 @@
 CREATE TABLE `players-sessions`
 (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `player` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `player` int(11) UNSIGNED NOT NULL,
   `type` varchar(7) NOT NULL,
   `key` text NOT NULL,
   `temp` tinyint(1) NOT NULL,

@@ -1,7 +1,7 @@
 CREATE TABLE `skills`
 (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `player` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `player` int(11) UNSIGNED NOT NULL,
   `skill` varchar(35) NOT NULL,
   `toggle` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
