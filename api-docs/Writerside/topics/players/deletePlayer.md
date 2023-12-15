@@ -7,6 +7,12 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}" method="DELETE">
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Enter player",
+				"file": "players.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>

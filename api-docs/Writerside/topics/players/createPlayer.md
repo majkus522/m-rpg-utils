@@ -4,13 +4,27 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players" method="POST">
     <request>
-        <sample src="players/postBody.json"/>
+        <sample lang="JSON">
+			{
+			  "username": "username1",
+			  "password": "UEBzc3cwcmQ=", //Must be encoded using BASE64
+			  "email": "example@mail.com"
+			}
+		</sample>
     </request>
     <response type="201">
-		<sample src="players/loginPlayer.json"/>
+		<sample lang="JSON">
+			1234567890123456789012345678
+		</sample>
 	</response>
     <response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Error message",
+				"file": "players.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

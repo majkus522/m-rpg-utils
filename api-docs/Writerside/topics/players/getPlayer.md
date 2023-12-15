@@ -8,15 +8,40 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}" method="GET">
 	<response type="200">
-		<sample src="players/getSingle.json"/>
+		<sample lang="JSON">
+			{
+				"id": 1,
+				"username": "username1",
+				"email": "example@email.com",
+				"level": 1,
+				"exp": 1,
+				"money": 1,
+				"clazz": "class",
+				"str": 1,
+				"agl": 1,
+				"chr": 1,
+				"intl": 1,
+				"def": 1,
+				"vtl": 1,
+				"dex": 1,
+				"guild": "guild slug"
+			}
+		</sample>
 	</response>
 	<response type="206">
-		<sample src="players/getSimpleSingle.json"/>
+		<sample lang="JSON">
+			{
+				"id": 1,
+				"username": "username1"
+			}
+		</sample>
 	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Player doesn't exists"
+				"message": "Player doesn't exists",
+				"file": "players.php",
+				"line": 0
 			}
 		</sample>
 	</response>

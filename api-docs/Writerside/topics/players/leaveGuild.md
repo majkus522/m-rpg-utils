@@ -7,7 +7,13 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}/leave" method="PATCH">
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Error message",
+				"file": "players.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

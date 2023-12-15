@@ -6,19 +6,29 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}/session" method="GET">
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Error message",
+				"file": "players.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="401">
 		<sample lang="JSON">
 			{
-				"message": "Incorrect session key"
+				"message": "Incorrect session key",
+				"file": "players.php",
+				"line": 0
 			}
 		</sample>
 	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Player doesn't exists"
+				"message": "Player doesn't exists",
+				"file": "players.php",
+				"line": 0
 			}
 		</sample>
 	</response>
@@ -26,6 +36,7 @@
 
 ## Possible errors - 400
 <list>
+	<li>Enter player</li>
 	<li>Enter player session</li>
 	<li>Enter session type</li>
 </list>

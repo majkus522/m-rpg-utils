@@ -1,6 +1,4 @@
-openapi: 3.0.2
-servers:
-  - url: /v3
+openapi: 3.0.3
 paths:
   /players:
     get:
@@ -11,26 +9,7 @@ paths:
           in: query
           description: Sort players
           schema:
-            type: string
-            enum:
-              - level
-              - level-desc
-              - money
-              - money-desc
-              - str
-              - str-desc
-              - agl
-              - agl-desc
-              - chr
-              - chr-desc
-              - intl
-              - intl-desc
-              - def
-              - def-desc
-              - vtl
-              - vtl-desc
-              - dex
-              - dex-desc
+            $ref: '#/components/schemas/OrderPlayers'
         - name: search
           in: query
           description: Search players by username
@@ -40,14 +19,7 @@ paths:
           in: query
           description: Filter players by their class
           schema:
-            type: string
-            enum:
-              - archer
-              - mage
-              - sorcerer
-              - tank
-              - warlock
-              - warrior
+            $ref: '#/components/schemas/PlayerClass'
         - name: Result-Count
           in: header
           description: "Maximal number of objects returned. Default: 50."
@@ -69,19 +41,21 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/responsePlayersSimple'
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerProtected'
         '400':
           description: Incorrect request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
         '404':
           description: Can't find any players matching conditions
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     post:
       summary: Register new player
       description: Register new player. Automatically logins player and returns session key.
@@ -91,20 +65,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/requestPlayer'
+              $ref: '#/components/schemas/PlayerRegister'
       responses:
         '201':
           description: Successful operation
           content:
-            int:
+            session-key:
               schema:
-                type: key
+                type: string
         '400':
           description: Incorrect request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
   /players/{$username}:
     get:
       summary: Get single player
@@ -120,43 +94,39 @@ paths:
           in: header
           description: Type of session
           schema:
-            type: string
-            enum:
-              - website
-              - game
+            $ref: '#/components/schemas/SessionType'
         - name: Session-Key
           in: header
           description: Key of session
           schema:
-            type: int
+            type: string
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/responsePlayer'
+                $ref: '#/components/schemas/Player'
         '206':
           description: Incorrect session
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/responsePlayerSimple'
+                $ref: '#/components/schemas/PlayerProtected'
         '404':
           description: Player doesn't exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     patch:
       summary: Change player data
-      description: Change player data.
+      description: Change player data. At least one property must be present in the request body, otherwise it will throw a error 400.
       requestBody:
-        description: Changes to player data.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/requestPlayerUpdate'
+              $ref: '#/components/schemas/PlayerUpdate'
       responses:
         '204':
           description: Successful operation
@@ -165,7 +135,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Delete player
       description: Delete player and all related data.
@@ -181,10 +151,7 @@ paths:
           description: Type of session
           required: true
           schema:
-            type: string
-            enum:
-              - website
-              - game
+            $ref: '#/components/schemas/SessionType'
         - name: Session-Key
           in: header
           description: Key of session
@@ -195,11 +162,11 @@ paths:
         '204':
           description: Successful operation
         '400':
-          description: Incorrect request
+          description: Enter player
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
   /players/{$username}/login:
     get:
       summary: Login player
@@ -216,10 +183,7 @@ paths:
           description: Type of session
           required: true
           schema:
-            type: string
-            enum:
-              - website
-              - game
+            $ref: '#/components/schemas/SessionType'
         - name: Password
           in: header
           description: Player password. Must be encoded using BASE64
@@ -230,27 +194,27 @@ paths:
         '200':
           description: Successful operation
           content:
-            int:
+            session-key:
               schema:
-                type: key
+                type: string
         '400':
           description: Incorrect request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
         '401':
           description: Incorrect password
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
         '404':
           description: Player doesn't exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
   /players/{$username}/session:
     get:
       summary: Check player session
@@ -267,10 +231,7 @@ paths:
           description: Type of session
           required: true
           schema:
-            type: string
-            enum:
-              - website
-              - game
+            $ref: '#/components/schemas/SessionType'
         - name: Session-Key
           in: header
           description: Key of session
@@ -285,19 +246,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
         '401':
           description: Incorrect session
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
         '404':
           description: Player doesn't exists
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
   /players/{$username}/leave:
     patch:
       summary: Leave guild
@@ -314,10 +275,7 @@ paths:
           description: Type of session
           required: true
           schema:
-            type: string
-            enum:
-              - website
-              - game
+            $ref: '#/components/schemas/SessionType'
         - name: Session-Key
           in: header
           description: Key of session
@@ -332,666 +290,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
-  /password-recovery:
-    get:
-      summary: Send recovery email
-      description: Sends password recovery email to player.
-      parameters:
-        - name: username
-          in: query
-          description: Players username
-          required: true
-          schema:
-            type: string
-        - name: password
-          in: query
-          description: Players email
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Enter username or email
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Player doesn't exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /password-recovery/{$code}:
-    patch:
-      summary: Set players new password
-      description: Sets a new password for users who have forgotten it.
-      parameters:
-        - name: code
-          in: path
-          description: Password recovery code
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: New password.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/requestPasswordRecovery'
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Code expired
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /skills/{$username}:
-    get:
-      summary: Get player skills
-      description: Get player skills.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-        - name: Result-Count
-          in: header
-          description: "Maximal number of objects returned. Default: 50."
-          schema:
-            type: int
-        - name: Result-Offset
-          in: header
-          description: "Offset of returned objects. Default: 0."
-          schema:
-            type: int
-        - name: rarity
-          in: query
-          description: Filter skills by their rarity
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - common
-                - extra
-                - unique
-                - ultimate
-                - unknown
-        - name: toggle
-          in: query
-          description: Get only disabled or enabled skills
-          schema:
-            type: bool
-        - name: search
-          in: query
-          description: Search skills by name
-          schema:
-            type: string
-        - name: order
-          in: query
-          description: Order skills
-          schema:
-            type: string
-            enum:
-              - rarity
-              - rarity-desc
-      responses:
-        '200':
-          description: Successful operation
-          headers:
-            Return-Count:
-              description: Number of objects returned.
-              schema:
-                type: int
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseSkills'
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Can't find any skills matching conditions
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /skills/{$username}/{$skill}:
-    get:
-      summary: Check if player has skill
-      description: Check if player has skill.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: skill
-          in: path
-          description: Skill to check
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      responses:
-        '204':
-          description: Successful operation
-        '404':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    patch:
-      summary: Toggle players skill
-      description: Toggle players skill.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: skill
-          in: path
-          description: Skill to check
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        description: New toggle value.
-        required: true
-        content:
-          bool:
-            schema:
-              type: bool
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /fake-status/${username}:
-    get:
-      summary: Get players fake status
-      description: Get players fake status.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseFakeStatus'
-        '404':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    post:
-      summary: Create fake status for player
-      description: Create fake status for player.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        description: Data for fake status
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/requestFakeStatus'
-      responses:
-        '201':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    patch:
-      summary: Create fake status for player
-      description: Create fake status for player.
-      parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        description: Data for fake status
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/requestFakeStatus'
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /guilds:
-    get:
-      summary: Get all guilds
-      description: Get all guilds.
-      responses:
-        '200':
-          description: Successful operation
-          headers:
-            Return-Count:
-              description: Number of objects returned.
-              schema:
-                type: int
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseGuilds'
-    post:
-      summary: Create guild
-      description: Create own guild.
-      parameters:
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/requestGuild'
-      responses:
-        '201':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /guilds/{$slug}:
-    get:
-      summary: Get guild
-      description: Get guild by its slug.
-      parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          headers:
-            Return-Count:
-              description: Number of objects returned.
-              schema:
-                type: int
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseGuildSingle'
-        '404':
-          description: Guild doesn't exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-    delete:
-      summary: Delete guild
-      description: Delete guild.
-      parameters:
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Enter guilds name
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Guild doesn't exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /guilds/{$slug}/members:
-    get:
-      summary: Get guild members
-      description: Get guild members. You must be a part of the guild.
-      parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/responseGuildMembers'
-          headers:
-            Return-Count:
-              description: Number of objects returned.
-              schema:
-                type: int
-        '400':
-          description: You are not part of this guild
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Guild doesn't exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /guilds/{$slug}/add:
-    patch:
-      summary: Add player to guild
-      description: Add player to guild. Only leader can do this.
-      parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        required: true
-        content:
-          username:
-            schema:
-              $ref: '#/components/schemas/requestAddPlayer'
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Can't find
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-  /guilds/{$slug}/kick:
-    patch:
-      summary: Kick player from guild
-      description: Kick player from guild. Only leader can do this.
-      parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            type: string
-            enum:
-              - website
-              - game
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: int
-      requestBody:
-        required: true
-        content:
-          username:
-            schema:
-              $ref: '#/components/schemas/requestAddPlayer'
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-        '404':
-          description: Can't find
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
-    responsePlayersSimple:
-      type: array
-      items:
-        type: object
-      properties:
-        id:
-          type: int
-        username:
-          type: string
-    responsePlayerSimple:
-      type: object
-      properties:
-        id:
-          type: int
-        username:
-          type: string
-    responsePlayer:
+    Player:
       type: object
       properties:
         id:
@@ -1005,16 +307,10 @@ components:
         exp:
           type: int
         money:
-          type: float
+          type: number
+          format: float
         clazz:
-          type: string
-          enum:
-            - warrior
-            - mage
-            - tank
-            - archer
-            - sorcerer
-            - warlock
+          $ref: '#/components/schemas/PlayerClass'
         str:
           type: int
         agl:
@@ -1029,73 +325,14 @@ components:
           type: int
         dex:
           type: int
-    responseSkills:
-      type: array
-      items:
-        type: object
+    PlayerProtected:
+      type: object
       properties:
+        id:
+          type: int
         username:
           type: string
-        password:
-          type: string
-        email:
-          type: string
-    responseFakeStatus:
-      type: object
-      properties:
-        id:
-          type: int
-        player:
-          type: int
-        level:
-          type: int
-        money:
-          type: float
-        clazz:
-          type: string
-        str:
-          type: int
-        agl:
-          type: int
-        chr:
-          type: int
-        intl:
-          type: int
-        def:
-          type: int
-        vtl:
-          type: int
-        dex:
-          type: int
-    responseGuilds:
-      type: array
-      items:
-        type: object
-      properties:
-        id:
-          type: int
-        name:
-          type: string
-        slug:
-          type: string
-        leader:
-          type: int
-    responseGuildSingle:
-      type: object
-      properties:
-        id:
-          type: int
-        name:
-          type: string
-        slug:
-          type: string
-        leader:
-          type: int
-    responseGuildMembers:
-      type: array
-      items:
-        type: string
-    requestPlayer:
+    PlayerRegister:
       type: object
       properties:
         username:
@@ -1104,62 +341,54 @@ components:
           type: string
         email:
           type: string
-    requestPlayerUpdate:
+    PlayerUpdate:
       type: object
       properties:
         password:
           type: string
         email:
           type: string
-    requestPasswordRecovery:
-      type: object
-      properties:
-        password:
-          type: string
-          example: "new password"
-    requestFakeStatus:
-      type: object
-      properties:
-        level:
-          type: int
-        money:
-          type: float
-        clazz:
-          type: string
-          enum:
-            - archer
-            - mage
-            - sorcerer
-            - tank
-            - warlock
-            - warrior
-        str:
-          type: int
-        agl:
-          type: int
-        chr:
-          type: int
-        intl:
-          type: int
-        def:
-          type: int
-        vtl:
-          type: int
-        dex:
-          type: int
-    requestGuild:
-      type: object
-      properties:
-        name:
-          type: string
-          example: name3
-        leader:
-          type: string
-          example: username3
-    requestAddPlayer:
-      type: string
-    error:
+    Error:
       type: object
       properties:
         message:
           type: string
+        file:
+          type: string
+        line:
+          type: int
+    PlayerClass:
+      type: string
+      enum:
+        - archer
+        - mage
+        - sorcerer
+        - tank
+        - warlock
+        - warrior
+    OrderPlayers:
+      type: string
+      enum:
+        - level
+        - level-desc
+        - money
+        - money-desc
+        - str
+        - str-desc
+        - agl
+        - agl-desc
+        - chr
+        - chr-desc
+        - intl
+        - intl-desc
+        - def
+        - def-desc
+        - vtl
+        - vtl-desc
+        - dex
+        - dex-desc
+    SessionType:
+      type: string
+      enum:
+        - website
+        - game

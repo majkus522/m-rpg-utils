@@ -7,10 +7,21 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}" method="PATCH">
     <request>
-        <sample src="players/patchBody.json"/>
+		<sample lang="JSON">
+			{
+			  "password": "new password", //Must be encoded using BASE64
+			  "email": "new email"
+			}
+		</sample>
     </request>
     <response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Error message",
+				"file": "players.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 
