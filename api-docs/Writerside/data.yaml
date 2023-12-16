@@ -291,6 +291,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /password-recovery:
+    post:
+      summary: Send recovery email
+      description: Sends password recovery email to player.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordRecoverySend'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Enter username or email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Player doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /password-recovery/{$code}:
+    patch:
+      summary: Set players new password
+      description: Sets a new password for users who have forgotten it.
+      parameters:
+        - name: code
+          in: path
+          description: Password recovery code
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: New password.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordRecoveryPatch'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Code expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Player:
@@ -347,6 +405,20 @@ components:
         password:
           type: string
         email:
+          type: string
+    PasswordRecoverySend:
+      type: object
+      properties:
+        username:
+          type: string
+          example: username1
+        email:
+          type: string
+          example: example@mail.com
+    PasswordRecoveryPatch:
+      type: object
+      properties:
+        password:
           type: string
     Error:
       type: object
