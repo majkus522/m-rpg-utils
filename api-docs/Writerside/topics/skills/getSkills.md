@@ -7,13 +7,40 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/skills/{$username}" method="GET">
     <response type="200">
-		<sample src="skills/getSkills.json"/>
+		<sample lang="JSON">
+			[
+				{
+					"id": 1,
+					"player": 1,
+					"skill": "skill1",
+					"toggle": 0
+				},
+				{
+					"id": 1,
+					"player": 1,
+					"skill": "skill2",
+					"toggle": 1
+				}
+			]
+		</sample>
 	</response>
     <response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "skills.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "skills.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

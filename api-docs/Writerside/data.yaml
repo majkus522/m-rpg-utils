@@ -349,6 +349,175 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /skills/{$username}:
+    get:
+      summary: Get player skills
+      description: Get player skills.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+        - name: Result-Count
+          in: header
+          description: "Maximal number of objects returned. Default: 50."
+          schema:
+            type: int
+        - name: Result-Offset
+          in: header
+          description: "Offset of returned objects. Default: 0."
+          schema:
+            type: int
+        - name: rarity
+          in: query
+          description: Filter skills by their rarity (Enum)
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Rarity'
+        - name: toggle
+          in: query
+          description: Get only disabled or enabled skills
+          schema:
+            type: bool
+        - name: search
+          in: query
+          description: Search skills by name
+          schema:
+            type: string
+        - name: order
+          in: query
+          description: Order skills
+          schema:
+            $ref: '#/components/schemas/OrderSkills'
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Skill'
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /skills/{$username}/{$skill}:
+    get:
+      summary: Check if player has skill
+      description: Check if player has skill.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: skill
+          in: path
+          description: Skill to check
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Toggle players skill
+      description: Toggle players skill.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: skill
+          in: path
+          description: Skill to check
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        description: New toggle value.
+        required: true
+        content:
+          toggle:
+            schema:
+              type: bool
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Player:
@@ -420,6 +589,17 @@ components:
       properties:
         password:
           type: string
+    Skill:
+      type: object
+      properties:
+        id:
+          type: int
+        player:
+          type: int
+        skill:
+          type: string
+        toggle:
+          type: bool
     Error:
       type: object
       properties:
@@ -459,8 +639,21 @@ components:
         - vtl-desc
         - dex
         - dex-desc
+    OrderSkills:
+      type: string
+      enum:
+        - rarity
+        - rarity-desc
     SessionType:
       type: string
       enum:
         - website
         - game
+    Rarity:
+      type: string
+      enum:
+        - common
+        - extra
+        - unique
+        - ultimate
+        - unknown

@@ -7,18 +7,30 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/skills/{$username}/{$skill}" method="PATCH">
 	<request>
-		<sample lang="JSON" title="On">
+		<sample lang="JSON">
 			true
 		</sample>
-		<sample lang="JSON" title="Off">
+		<sample lang="JSON">
 			false
 		</sample>
 	</request>
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "skills.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "skills.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

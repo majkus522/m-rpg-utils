@@ -7,7 +7,13 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/skills/{$username}/{$skill}" method="GET">
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "skills.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 
