@@ -6,14 +6,23 @@
 <include from="notes.md" element-id="session"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/fake-status/${username}" method="POST">
-	<request>
-		<sample src="fake-status/requestFakeStatusAll.json"/>
-	</request>
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

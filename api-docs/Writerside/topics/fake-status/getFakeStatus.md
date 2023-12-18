@@ -7,10 +7,31 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/fake-status/${username}" method="GET">
 	<response type="200">
-		<sample src="fake-status/getFakeStatus.json"/>
+		<sample lang="JSON">
+			{
+				"id": 1,
+				"player": 1,
+				"level": 8,
+				"money": 9900,
+				"clazz": "warlock",
+				"str": 19,
+				"agl": 109,
+				"chr": 90,
+				"intl": 50,
+				"def": 0,
+				"vtl": 30,
+				"dex": 100
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

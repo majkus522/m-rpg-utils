@@ -518,6 +518,130 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /fake-status/${username}:
+    get:
+      summary: Get players fake status
+      description: Get players fake status.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FakeStatus'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create fake status for player
+      description: Create fake status for player.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        description: Data for fake status
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FakeStatusEdit'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Create fake status for player
+      description: Create fake status for player.
+      parameters:
+        - name: username
+          in: path
+          description: Username of player
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        description: Data for fake status
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FakeStatusEdit'
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Player:
@@ -600,6 +724,68 @@ components:
           type: string
         toggle:
           type: bool
+    FakeStatus:
+      type: object
+      properties:
+        id:
+          type: int
+        player:
+          type: int
+        level:
+          type: int
+        money:
+          type: number
+          format: float
+        clazz:
+          $ref: '#/components/schemas/PlayerClass'
+        str:
+          type: int
+        agl:
+          type: int
+        chr:
+          type: int
+        intl:
+          type: int
+        def:
+          type: int
+        vtl:
+          type: int
+        dex:
+          type: int
+    FakeStatusEdit:
+      type: object
+      properties:
+        level:
+          type: int
+          example: 1
+        money:
+          type: number
+          format: float
+          example: 1
+        clazz:
+          $ref: '#/components/schemas/PlayerClass'
+          example: archer
+        str:
+          type: int
+          example: 1
+        agl:
+          type: int
+          example: 1
+        chr:
+          type: int
+          example: 1
+        intl:
+          type: int
+          example: 1
+        def:
+          type: int
+          example: 1
+        vtl:
+          type: int
+          example: 1
+        dex:
+          type: int
+          example: 1
     Error:
       type: object
       properties:

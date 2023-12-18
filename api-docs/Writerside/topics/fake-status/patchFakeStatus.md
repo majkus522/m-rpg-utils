@@ -6,18 +6,27 @@
 <include from="notes.md" element-id="session"/>
 
 <note title="Request body">
-	Request body must contain at least one of parameters. If there are no parameters, it will return error 400.
+	At least one property must be present in the request body, otherwise it will throw a error 400.
 </note> 
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/fake-status/${username}" method="PATCH">
-	<request>
-		<sample src="fake-status/requestFakeStatus.json"/>
-	</request>
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 
