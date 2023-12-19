@@ -8,12 +8,21 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds/{$slug}" method="GET">
 	<response type="200">
-		<sample src="guilds/getGuildSingle.json"/>
+		<sample lang="JSON">
+			{
+				"id": 1,
+				"name": "Name_1",
+				"slug": "name-1",
+				"leader": 1
+			}
+		</sample>
 	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Guild doesn't exists"
+				"message": "Guild doesn't exists",
+				"file": "guilds.php",
+				"line": 0
 			}
 		</sample>
 	</response>

@@ -6,7 +6,13 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds" method="POST">
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 

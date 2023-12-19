@@ -642,6 +642,253 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /guilds:
+    get:
+      summary: Get all guilds
+      description: Get all guilds.
+      responses:
+        '200':
+          description: Successful operation
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Guild'
+    post:
+      summary: Create guild
+      description: Create own guild.
+      parameters:
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuildCreate'
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /guilds/{$slug}:
+    get:
+      summary: Get guild
+      description: Get guild by its slug.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guild'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete guild
+      description: Delete guild.
+      parameters:
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Enter guilds name
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /guilds/{$slug}/members:
+    get:
+      summary: Get guild members
+      description: Get guild members. You must be a part of the guild.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+          headers:
+            Return-Count:
+              description: Number of objects returned.
+              schema:
+                type: int
+        '400':
+          description: You are not part of this guild
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Guild doesn't exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /guilds/{$slug}/add:
+    patch:
+      summary: Add player to guild
+      description: Add player to guild. Only leader can do this.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          username:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /guilds/{$slug}/kick:
+    patch:
+      summary: Kick player from guild
+      description: Kick player from guild. Only leader can do this.
+      parameters:
+        - name: slug
+          in: query
+          description: Guild slug
+          required: true
+          schema:
+            type: string
+        - name: Session-Type
+          in: header
+          description: Type of session
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionType'
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          username:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Can't find
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Player:
@@ -786,6 +1033,26 @@ components:
         dex:
           type: int
           example: 1
+    Guild:
+      type: object
+      properties:
+        id:
+          type: int
+        name:
+          type: string
+        slug:
+          type: string
+        leader:
+          type: int
+    GuildCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Name 3"
+        leader:
+          type: string
+          example: username3
     Error:
       type: object
       properties:

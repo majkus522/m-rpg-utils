@@ -9,14 +9,18 @@
 	<response type="400">
 		<sample lang="JSON">
 			{
-				"message": "Enter guilds name"
+				"message": "Enter guilds name",
+				"file": "guilds.php",
+				"line": 0
 			}
 		</sample>
 	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Guild doesn't exists"
+				"message": "Guild doesn't exists",
+				"file": "guilds.php",
+				"line": 0
 			}
 		</sample>
 	</response>

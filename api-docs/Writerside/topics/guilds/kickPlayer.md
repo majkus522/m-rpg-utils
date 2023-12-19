@@ -7,13 +7,25 @@
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds/{$slug}/kick" method="PATCH">
 	<request>
-		<sample src="guilds/requestAddPlayer.json"/>
+		<sample>username1</sample>
 	</request>
 	<response type="400">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Incorrect request",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 	<response type="404">
-		<sample src="error.json"/>
+		<sample lang="JSON">
+			{
+				"message": "Can't find",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
 	</response>
 </api-endpoint>
 
