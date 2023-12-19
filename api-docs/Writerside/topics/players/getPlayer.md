@@ -6,6 +6,10 @@
 	If the variable in the url is not present it will be redirected to <a href="getAllPlayers.md">this endpoint</a>.
 </note>
 
+<note title="Session">
+	If session header are not present or incorrect this endpoint will return only partial content (206).
+</note>
+
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}" method="GET">
 	<response type="200">
 		<sample lang="JSON">
