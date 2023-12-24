@@ -27,6 +27,7 @@
             <toc-element topic="getGuildSingle.md"/>
             <toc-element topic="getMembers.md"/>
             <toc-element topic="postGuild.md"/>
+            <toc-element topic="newLeader.md"/>
             <toc-element topic="addPlayer.md"/>
             <toc-element topic="kickPlayer.md"/>
             <toc-element topic="deleteGuild.md"/>
