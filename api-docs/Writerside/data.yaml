@@ -668,6 +668,17 @@ paths:
     get:
       summary: Get all guilds
       description: Get all guilds.
+      parameters:
+        - name: Result-Count
+          in: header
+          description: "Maximal number of objects returned. Default: 50."
+          schema:
+            type: int
+        - name: Result-Offset
+          in: header
+          description: "Offset of returned objects. Default: 0."
+          schema:
+            type: int
       responses:
         '200':
           description: Successful operation
@@ -682,6 +693,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Guild'
+        '404':
+          description: Can't find any guild matching conditions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     post:
       summary: Create guild
       description: Create own guild.
