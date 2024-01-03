@@ -9,9 +9,18 @@
 	<response type="200">
 		<sample lang="JSON">
 			[
-				"username1",
-				"username2",
-				"username3"
+				{
+					"username": "username1",
+					"type": "leader"
+				},
+				{
+					"username": "username2",
+					"type": "vice_leader"
+				},
+				{
+					"username": "username3",
+					"type": "member"
+				}
 			]
 		</sample>
 	</response>

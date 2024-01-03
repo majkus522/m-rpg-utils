@@ -865,7 +865,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string
+                  $ref: '#/components/schemas/GuildMember'
           headers:
             Return-Count:
               description: Number of objects returned.
@@ -1140,7 +1140,17 @@ components:
       properties:
         leader:
           type: string
-          example: username
+          example: username1
+        vice_leader:
+          type: string
+          example: username2
+    GuildMember:
+      type: object
+      properties:
+        username:
+          type: string
+        type:
+          $ref: '#/components/schemas/MemberType'
     Error:
       type: object
       properties:
@@ -1198,3 +1208,9 @@ components:
         - unique
         - ultimate
         - unknown
+    MemberType:
+      type: string
+      enum:
+        - leader
+        - vice_leader
+        - member

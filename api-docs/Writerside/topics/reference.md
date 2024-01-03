@@ -42,6 +42,7 @@
 	        <li><a href="getGuilds.md">Get all guilds</a></li>
 	        <li><a href="getGuildSingle.md">Get guild</a></li>
 	        <li><a href="postGuild.md">Create guild</a></li>
+	        <li><a href="editGuild.md">Edit guild</a></li>
 	        <li><a href="addPlayer.md">Add player to guild</a></li>
 	        <li><a href="kickPlayer.md">Kick player from guild</a></li>
 	        <li><a href="deleteGuild.md">Delete guild</a></li>

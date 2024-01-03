@@ -4,6 +4,8 @@ CREATE TABLE `guilds`
   `name` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL UNIQUE,
   `leader` int(11) UNSIGNED NULL UNIQUE,
+  `vice_leader` int(11) UNSIGNED NULL UNIQUE DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`leader`) REFERENCES `players`(id) ON DELETE SET NULL ON UPDATE CASCADE
+  FOREIGN KEY (`leader`) REFERENCES `players`(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (`vice_leader`) REFERENCES `players`(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
