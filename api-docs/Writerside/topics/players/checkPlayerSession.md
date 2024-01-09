@@ -8,7 +8,7 @@
 	<response type="400">
 		<sample lang="JSON">
 			{
-				"message": "Error message",
+				"message": "Incorrect request",
 				"file": "players.php",
 				"line": 0
 			}
@@ -17,7 +17,7 @@
 	<response type="401">
 		<sample lang="JSON">
 			{
-				"message": "Incorrect session key",
+				"message": "Unauthorized",
 				"file": "players.php",
 				"line": 0
 			}
@@ -36,7 +36,12 @@
 
 ## Possible errors - 400
 <list>
-	<li>Enter player</li>
-	<li>Enter player session</li>
-	<li>Enter session type</li>
+	<li>Enter session key</li>
+	<li>Enter session id</li>
+</list>
+
+## Possible errors - 401
+<list>
+	<li>Incorrect player</li>
+	<li>Incorrect session key</li>
 </list>

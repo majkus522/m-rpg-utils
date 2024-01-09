@@ -7,13 +7,16 @@
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/players/{$username}/login" method="GET">
 	<response type="200">
 		<sample lang="JSON">
-			1234567890123456789012345678
+			{
+				"key": "0874766202401092016080742134",
+				"id": 0
+			}
 		</sample>
 	</response>
 	<response type="400">
 		<sample lang="JSON">
 			{
-				"message": "Error message",
+				"message": "Incorrect request",
 				"file": "players.php",
 				"line": 0
 			}
@@ -41,7 +44,6 @@
 
 ## Possible errors - 400
 <list>
-	<li>Enter player</li>
 	<li>Enter player password</li>
 	<li>Enter session type</li>
 </list>

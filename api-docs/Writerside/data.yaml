@@ -20,16 +20,8 @@ paths:
           description: Filter players by their class
           schema:
             $ref: '#/components/schemas/PlayerClass'
-        - name: Result-Count
-          in: header
-          description: "Maximal number of objects returned. Default: 50."
-          schema:
-            type: int
-        - name: Result-Offset
-          in: header
-          description: "Offset of returned objects. Default: 0."
-          schema:
-            type: int
+        - $ref: '#/components/parameters/Result-Count'
+        - $ref: '#/components/parameters/Result-Offset'
       responses:
         '206':
           description: Successful operation
@@ -84,24 +76,9 @@ paths:
       summary: Get single player
       description: Get player full data. Return only simple data if session is incorrect or isn't entered.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '200':
           description: Successful operation
@@ -125,24 +102,9 @@ paths:
       summary: Change player data
       description: Change player data. At least one property must be present in the request body, otherwise it will throw a error 400.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         required: true
         content:
@@ -162,24 +124,9 @@ paths:
       summary: Delete player
       description: Delete player and all related data.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '204':
           description: Successful operation
@@ -194,18 +141,16 @@ paths:
       summary: Login player
       description: Login player and get session key.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
         - name: Session-Type
           in: header
           description: Type of session
           required: true
           schema:
-            $ref: '#/components/schemas/SessionType'
+            type: string
+            enum:
+              - website
+              - game
         - name: Password
           in: header
           description: Player password. Must be encoded using BASE64
@@ -216,9 +161,14 @@ paths:
         '200':
           description: Successful operation
           content:
-            session-key:
+            application/json:
               schema:
-                type: string
+                type: object
+                properties:
+                  key:
+                    type: string
+                  id:
+                    type: int
         '400':
           description: Incorrect request
           content:
@@ -242,24 +192,9 @@ paths:
       summary: Check player session
       description: Check if player session is correct.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '204':
           description: Successful operation
@@ -286,24 +221,9 @@ paths:
       summary: Leave guild
       description: Leave your guild.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '204':
           description: Successful operation
@@ -376,34 +296,11 @@ paths:
       summary: Get player skills
       description: Get player skills.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
-        - name: Result-Count
-          in: header
-          description: "Maximal number of objects returned. Default: 50."
-          schema:
-            type: int
-        - name: Result-Offset
-          in: header
-          description: "Offset of returned objects. Default: 0."
-          schema:
-            type: int
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
+        - $ref: '#/components/parameters/Result-Count'
+        - $ref: '#/components/parameters/Result-Offset'
         - name: rarity
           in: query
           description: Filter skills by their rarity (Enum)
@@ -457,30 +354,15 @@ paths:
       summary: Check if player has skill
       description: Check if player has skill.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
         - name: skill
           in: path
           description: Skill to check
           required: true
           schema:
             type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '204':
           description: Successful operation
@@ -494,30 +376,15 @@ paths:
       summary: Toggle players skill
       description: Toggle players skill.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
         - name: skill
           in: path
           description: Skill to check
           required: true
           schema:
             type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         description: New toggle value.
         required: true
@@ -545,24 +412,9 @@ paths:
       summary: Get players fake status
       description: Get players fake status.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '200':
           description: Successful operation
@@ -580,24 +432,9 @@ paths:
       summary: Create fake status for player
       description: Create fake status for player.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         description: Data for fake status
         required: true
@@ -624,24 +461,9 @@ paths:
       summary: Create fake status for player
       description: Create fake status for player.
       parameters:
-        - name: username
-          in: path
-          description: Username of player
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Username'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         description: Data for fake status
         required: true
@@ -669,16 +491,8 @@ paths:
       summary: Get all guilds
       description: Get all guilds.
       parameters:
-        - name: Result-Count
-          in: header
-          description: "Maximal number of objects returned. Default: 50."
-          schema:
-            type: int
-        - name: Result-Offset
-          in: header
-          description: "Offset of returned objects. Default: 0."
-          schema:
-            type: int
+        - $ref: '#/components/parameters/Result-Count'
+        - $ref: '#/components/parameters/Result-Offset'
       responses:
         '200':
           description: Successful operation
@@ -703,18 +517,8 @@ paths:
       summary: Create guild
       description: Create own guild.
       parameters:
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         required: true
         content:
@@ -735,12 +539,7 @@ paths:
       summary: Get guild
       description: Get guild by its slug.
       parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Guild-Slug'
       responses:
         '200':
           description: Successful operation
@@ -758,24 +557,9 @@ paths:
       summary: Select new leader
       description: Select new leader.
       parameters:
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
+        - $ref: '#/components/parameters/Guild-Slug'
       requestBody:
         required: true
         content:
@@ -801,24 +585,9 @@ paths:
       summary: Delete guild
       description: Delete guild.
       parameters:
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
+        - $ref: '#/components/parameters/Guild-Slug'
       responses:
         '204':
           description: Successful operation
@@ -839,24 +608,9 @@ paths:
       summary: Get guild members
       description: Get guild members. You must be a part of the guild.
       parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Guild-Slug'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       responses:
         '200':
           description: Successful operation
@@ -888,24 +642,9 @@ paths:
       summary: Add player to guild
       description: Add player to guild. Only leader can do this.
       parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Guild-Slug'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         required: true
         content:
@@ -932,24 +671,9 @@ paths:
       summary: Kick player from guild
       description: Kick player from guild. Only leader can do this.
       parameters:
-        - name: slug
-          in: query
-          description: Guild slug
-          required: true
-          schema:
-            type: string
-        - name: Session-Type
-          in: header
-          description: Type of session
-          required: true
-          schema:
-            $ref: '#/components/schemas/SessionType'
-        - name: Session-Key
-          in: header
-          description: Key of session
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Guild-Slug'
+        - $ref: '#/components/parameters/Session-ID'
+        - $ref: '#/components/parameters/Session-Key'
       requestBody:
         required: true
         content:
@@ -972,6 +696,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
+  parameters:
+    Session-ID:
+      name: Session-ID
+      in: header
+      description: ID of session
+      required: true
+      schema:
+        type: int
+    Session-Key:
+      name: Session-Key
+      in: header
+      description: Key of session
+      required: true
+      schema:
+        type: string
+    Result-Count:
+      name: Result-Count
+      in: header
+      description: "Maximal number of objects returned. Default: 50."
+      schema:
+        type: int
+    Result-Offset:
+      name: Result-Offset
+      in: header
+      description: "Offset of returned objects. Default: 0."
+      schema:
+        type: int
+    Guild-Slug:
+      name: slug
+      in: query
+      description: Guild slug
+      required: true
+      schema:
+        type: string
+    Username:
+      name: username
+      in: path
+      description: Username of player
+      required: true
+      schema:
+        type: string
   schemas:
     Player:
       type: object
@@ -1195,11 +960,6 @@ components:
       enum:
         - rarity
         - rarity-desc
-    SessionType:
-      type: string
-      enum:
-        - website
-        - game
     Rarity:
       type: string
       enum:
