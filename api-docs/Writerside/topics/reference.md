@@ -19,7 +19,6 @@
 	        <li><a href="checkPlayerSession.md">Check player session</a></li>
 	        <li><a href="createPlayer.md">Create new player</a></li>
 	        <li><a href="editPlayer.md">Edit player data</a></li>
-	        <li><a href="leaveGuild.md">Leave guild</a></li>
 	        <li><a href="deletePlayer.md">Delete player</a></li>
         </list>
 	</def>

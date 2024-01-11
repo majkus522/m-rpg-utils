@@ -18,6 +18,15 @@
 			}
 		</sample>
 	</response>
+	<response type="401">
+		<sample lang="JSON">
+			{
+				"message": "Unauthorized",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
+	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
@@ -34,6 +43,12 @@
 	<li>Enter guilds name</li>
 	<li>Enter player</li>
 	<li>Player isn't part of your guild</li>
+</list>
+
+## Possible errors - 401
+<list>
+	<li>You don't have permission to do this (vice leader)</li>
+	<li>You can't kick guilds leader</li>
 </list>
 
 ## Possible errors - 404

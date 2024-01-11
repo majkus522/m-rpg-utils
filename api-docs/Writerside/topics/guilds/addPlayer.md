@@ -18,6 +18,15 @@
 			}
 		</sample>
 	</response>
+	<response type="401">
+		<sample lang="JSON">
+			{
+				"message": "You don't have permission to do this (vice leader)",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
+	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{

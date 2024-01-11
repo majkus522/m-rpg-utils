@@ -15,10 +15,19 @@
 			}
 		</sample>
 	</response>
+	<response type="401">
+		<sample lang="JSON">
+			{
+				"message": "Only leader can delete a guild",
+				"file": "guilds.php",
+				"line": 0
+			}
+		</sample>
+	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Guild doesn't exists",
+				"message": "Guild is already deleted",
 				"file": "guilds.php",
 				"line": 0
 			}

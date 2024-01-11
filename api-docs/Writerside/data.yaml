@@ -216,23 +216,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /players/{$username}/leave:
-    patch:
-      summary: Leave guild
-      description: Leave your guild.
-      parameters:
-        - $ref: '#/components/parameters/Username'
-        - $ref: '#/components/parameters/Session-ID'
-        - $ref: '#/components/parameters/Session-Key'
-      responses:
-        '204':
-          description: Successful operation
-        '400':
-          description: Incorrect request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /password-recovery:
     post:
       summary: Send recovery email
@@ -575,6 +558,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Can't find
           content:
@@ -597,8 +586,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          description: Only leader can delete a guild
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
-          description: Guild doesn't exists
+          description: Guild is already deleted
           content:
             application/json:
               schema:
@@ -660,6 +655,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '401':
+          description: You don't have permission to do this (vice leader)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Can't find
           content:
@@ -669,7 +670,7 @@ paths:
   /guilds/{$slug}/kick:
     patch:
       summary: Kick player from guild
-      description: Kick player from guild. Only leader can do this.
+      description: Kick player from guild. Only leader can do this. Can also be used to leave your current guild.
       parameters:
         - $ref: '#/components/parameters/Guild-Slug'
         - $ref: '#/components/parameters/Session-ID'
@@ -685,6 +686,12 @@ paths:
           description: Successful operation
         '400':
           description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
