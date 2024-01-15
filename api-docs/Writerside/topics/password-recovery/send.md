@@ -26,3 +26,17 @@
 		</sample>
 	</response>
 </api-endpoint>
+
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<def title="Enter username or email">
+		Occurs when the email address or username property is missing in the request body.
+	</def>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<def title="Player doesn't exists">
+		The player with the entered email address or username does not exist.
+	</def>
+</deflist>

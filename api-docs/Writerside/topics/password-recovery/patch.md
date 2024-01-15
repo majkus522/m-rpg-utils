@@ -2,6 +2,7 @@
 
 <highlight>Set players new password</highlight>
 
+<var name="urlVariableSummary" type="string" value="HTTP 400 - Enter code"/>
 <include from="notes.md" element-id="urlVariable"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/password-recovery/{$code}" method="PATCH">
@@ -32,19 +33,17 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter code</li>
-</list>
-<deflist collapsible="true" default-state="collapsed">
-	<def title="Password errors">
-		<list>
-			<li>Enter password</li>
-			<li>Password must be at least 6 characters long</li>
-			<li>Password must contain at least one large character</li>
-			<li>Password must contain at least one small character</li>
-			<li>Password must contain at least one number</li>
-			<li>Password must contain at least one special character</li>
-		</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<def title="Enter code" id="urlVariableLink">
+		Occurs when there is no password recovery code in the URL.
+	</def>
+</deflist>
+<include from="error.md" element-id="passwordErrors"/>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<def title="Link expired">
+		The password recovery code has already been used or has expired. To generate a new one, use <a href="send.md">this endpoint</a>.
 	</def>
 </deflist>
