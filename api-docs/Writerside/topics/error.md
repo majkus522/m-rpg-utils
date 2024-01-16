@@ -18,3 +18,7 @@
 		The new password must contain at least 1 special character.
 	</def>
 </deflist>
+
+<def title="Player doesn't exists" id="pde">
+	The entered player does not exist.
+</def>

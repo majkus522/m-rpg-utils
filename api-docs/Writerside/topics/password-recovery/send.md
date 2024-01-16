@@ -36,7 +36,5 @@
 
 ## HTTP Errors - 404
 <deflist collapsible="false">
-	<def title="Player doesn't exists">
-		The player with the entered email address or username does not exist.
-	</def>
+	<include from="error.md" element-id="pde"/>
 </deflist>
