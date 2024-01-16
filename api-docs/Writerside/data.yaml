@@ -405,6 +405,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FakeStatus'
+        '400':
+          description: Enter player
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Can't find
           content:

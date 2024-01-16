@@ -24,10 +24,19 @@
 			}
 		</sample>
 	</response>
+	<response type="400">
+		<sample lang="JSON">
+			{
+				"message": "Enter player",
+				"file": "fake-status.php",
+				"line": 0
+			}
+		</sample>
+	</response>
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "fake-status.php",
 				"line": 0
 			}
@@ -35,8 +44,15 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 404
-<list>
-	<li>Player doesn't exists</li>
-	<li>Player doesn't have fake status</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+	<def title="Player doesn't have fake status">
+		The introduced player does not have the fake status skill or has not yet created a fake status.
+	</def>
+</deflist>

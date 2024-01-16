@@ -1,3 +1,4 @@
 <vars>
-	<var name="urlVariableLink" value="urlVariableLink"/>
+	<var name="urlVariableSummary" type="string" value="HTTP 400 - Enter player"/>
+	<var name="urlVariableLink" value="ep"/>
 </vars>

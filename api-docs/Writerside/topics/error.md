@@ -22,3 +22,15 @@
 <def title="Player doesn't exists" id="pde">
 	The entered player does not exist.
 </def>
+
+<def title="Enter player" id="ep">
+	Occurs when there is no player username in the URL.
+</def>
+
+<def title="Enter some changes" id="esc">
+	Occurs when there are no changes to the request body.
+</def>
+
+<def title="Incorrect value: $parameter" id="ivp">
+	Occurs when the <format color='BlueViolet'>{$parameter}</format> value is invalid.
+</def>

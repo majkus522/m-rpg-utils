@@ -35,7 +35,7 @@
 
 ## HTTP Errors - 400
 <deflist collapsible="false">
-	<def title="Enter code" id="urlVariableLink">
+	<def title="Enter code" id="ep">
 		Occurs when there is no password recovery code in the URL.
 	</def>
 </deflist>
