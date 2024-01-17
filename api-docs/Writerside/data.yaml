@@ -349,6 +349,12 @@ paths:
       responses:
         '204':
           description: Successful operation
+        '400':
+          description: Enter player
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '404':
           description: Can't find
           content:

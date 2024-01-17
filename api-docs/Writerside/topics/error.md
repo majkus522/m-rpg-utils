@@ -34,3 +34,7 @@
 <def title="Incorrect value: $parameter" id="ivp">
 	Occurs when the <format color='BlueViolet'>{$parameter}</format> value is invalid.
 </def>
+
+<def title="Skill doesn't exists" id="sde">
+	The entered skill does not exist.
+</def>

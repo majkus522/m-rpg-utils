@@ -36,7 +36,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "skills.php",
 				"line": 0
 			}
@@ -44,16 +44,27 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Unknown query string parameter <format color="BlueViolet">{$parameter}</format></li>
-	<li>Unknown order parameter <format color="BlueViolet">{$value}</format></li>
-	<li>Incorrect query string (toggle) value</li>
-	<li>Unknown rarity parameter <format color="BlueViolet">{$value}</format></li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+	<def title="Unknown query string parameter {$parameter}">
+		Occurs when the <format color="BlueViolet">{$parameter}</format> is invalid.
+	</def>
+	<def title="Unknown order parameter {$value}">
+		Occurs when the order query string has incorrect value.
+	</def>
+	<def title="Incorrect query string (toggle) value">
+		Occurs when the toggle query string has incorrect value.
+	</def>
+	<def title="Unknown rarity parameter {$value}">
+		Occurs when the rarity query string has incorrect value.
+	</def>
+</deflist>
 
-## Possible errors - 404
-<list>
-	<li>Player doesn't exists</li>
-	<li>Can't find any skills matching conditions</li>
-</list>
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+	<def title="Can't find any skills matching conditions">
+		Can't find any skill matching query string parameters to given player.
+	</def>
+</deflist>

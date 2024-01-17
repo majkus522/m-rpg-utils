@@ -2,7 +2,10 @@
 
 <highlight>Toggle players skill</highlight>
 
-<include from="notes.md" element-id="urlVariable"/>
+<warning id="urlVariable" title="Url variable">
+    There is a variable present in the url of this endpoint. 
+    If the variable is not present while using this endpoint, it will return <a anchor="%urlVariableLink%" summary="%urlVariableSummary%">this error</a> or <a anchor="es" summary="HTTP 400 - Enter skill">this error</a> depending on missing variable.
+</warning>
 <include from="notes.md" element-id="session"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/skills/{$username}/{$skill}" method="PATCH">
@@ -26,7 +29,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "skills.php",
 				"line": 0
 			}
@@ -34,14 +37,22 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Skill can't be toggled</li>
-	<li>Enter new toggle value</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+	<def title="Enter skill" id="es">
+		Occurs when there is no skill name in the URL.
+	</def>
+	<def title="Skill can't be toggled">
+		The skill that you want to toggle can not be toggled.
+	</def>
+	<def title="Enter new toggle value">
+		Occurs when the request body does not contain a new toggle value.
+	</def>
+</deflist>
 
-## Possible errors - 404
-<list>
-	<li>Player doesn't exists</li>
-	<li>Skill doesn't exists</li>
-</list>
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+	<include from="error.md" element-id="sde"/>
+</deflist>
