@@ -2,7 +2,7 @@
 
 <highlight>Add player to guild</highlight>
 
-<include from="notes.md" element-id="urlVariable"/>
+<include from="urlVariableGuild.md" element-id="urlVariable"/>
 <include from="notes.md" element-id="session"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds/{$slug}/add" method="PATCH">
@@ -30,7 +30,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "guilds.php",
 				"line": 0
 			}
@@ -38,15 +38,22 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter guilds name</li>
-	<li>Enter player</li>
-	<li>Player is already part of the guild</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="egn"/>
+	<include from="error.md" element-id="eprb"/>
+	<def title="Player is already part of the guild">
+		The player that you want to add to the guild is already part of yours or other guild.
+	</def>
+</deflist>
 
-## Possible errors - 404
-<list>
-	<li>Guild doesn't exists</li>
-	<li>Player doesn't exists</li>
-</list>
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<include from="error.md" element-id="pvl"/>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="gde"/>
+	<include from="error.md" element-id="pde"/>
+</deflist>

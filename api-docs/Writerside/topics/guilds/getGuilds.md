@@ -31,3 +31,10 @@
 		</sample>
 	</response>
 </api-endpoint>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<def title="Can't find any guild matching conditions">
+		Can't find any guild matching parameters in request.
+	</def>
+</deflist>

@@ -2,7 +2,7 @@
 
 <highlight>Kick player from guild</highlight>
 
-<include from="notes.md" element-id="urlVariable"/>
+<include from="urlVariableGuild.md" element-id="urlVariable"/>
 <include from="notes.md" element-id="session"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds/{$slug}/kick" method="PATCH">
@@ -30,7 +30,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "guilds.php",
 				"line": 0
 			}
@@ -38,21 +38,25 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter guilds name</li>
-	<li>Enter player</li>
-	<li>Player isn't part of your guild</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="egn"/>
+	<include from="error.md" element-id="eprb"/>
+	<def title="Player isn't part of your guild">
+		Player has to be part of your guild to kick him.
+	</def>
+</deflist>
 
-## Possible errors - 401
-<list>
-	<li>You don't have permission to do this (vice leader)</li>
-	<li>You can't kick guilds leader</li>
-</list>
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<include from="error.md" element-id="pvl"/>
+	<def title="You can't kick guilds leader">
+		As a guilds vice leader you can not kick guilds leader.
+	</def>
+</deflist>
 
-## Possible errors - 404
-<list>
-	<li>Guild doesn't exists</li>
-	<li>Player doesn't exists</li>
-</list>
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="gde"/>
+	<include from="error.md" element-id="pde"/>
+</deflist>

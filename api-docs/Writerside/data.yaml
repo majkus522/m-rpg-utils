@@ -577,7 +577,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
-          description: Can't find
+          description: Not found
           content:
             application/json:
               schema:
@@ -674,7 +674,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
-          description: Can't find
+          description: Not found
           content:
             application/json:
               schema:
@@ -709,7 +709,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
         '404':
-          description: Can't find
+          description: Not found
           content:
             application/json:
               schema:

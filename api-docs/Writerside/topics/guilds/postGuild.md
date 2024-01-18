@@ -16,11 +16,21 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter guilds name</li>
-	<li>Enter guilds leader</li>
-	<li>Guilds name is too long</li>
-	<li>Guild already exists</li>
-	<li>You are already part of guild</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<def title="Enter guilds name">
+		There is no guild name in request body.
+	</def>
+	<def title="Enter guilds leader">
+		There is no guild leader in request body.
+	</def>
+	<def title="Guilds name is too long">
+		Guilds name should contain max 100 characters.
+	</def>
+	<def title="Guild already exists">
+		Guilds name is already taken.
+	</def>
+	<def title="You are already part of guild">
+		You can not be part of any guild to create own.
+	</def>
+</deflist>

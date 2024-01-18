@@ -2,7 +2,7 @@
 
 <highlight>Delete guild</highlight>
 
-<include from="notes.md" element-id="urlVariable"/>
+<include from="urlVariableGuild.md" element-id="urlVariable"/>
 <include from="notes.md" element-id="session"/>
 
 <api-endpoint openapi-path="./../../data.yaml" endpoint="/guilds/{$slug}" method="DELETE">
@@ -34,3 +34,22 @@
 		</sample>
 	</response>
 </api-endpoint>
+
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="egn"/>
+</deflist>
+
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<def title="Only leader can delete a guild">
+		You have to be at least guilds leader to do this.
+	</def>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<def title="Guild is already deleted">
+		Guild that you want to delete is already deleted or never existed.
+	</def>
+</deflist>

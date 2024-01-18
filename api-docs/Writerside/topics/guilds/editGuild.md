@@ -2,11 +2,11 @@
 
 <highlight>Edit guild</highlight>
 
-<include from="notes.md" element-id="urlVariable"/>
+<include from="urlVariableGuild.md" element-id="urlVariable"/>
 <include from="notes.md" element-id="session"/>
 
 <note title="Request body">
-	At least one property must be present in the request body, otherwise it will throw a error 400.
+	There must be at least one property in the request body, otherwise it will throw a <a anchor="esc" summary="HTTP 400 - Enter some changes">400 error </a>.
 </note> 
 
 <api-endpoint openapi-path="../../data.yaml" endpoint="/guilds/{$slug}" method="PATCH">
@@ -31,7 +31,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "guilds.php",
 				"line": 0
 			}
@@ -39,22 +39,28 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter guilds name</li>
-	<li>Enter some changes</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="egn"/>
+	<include from="error.md" element-id="esc"/>
+</deflist>
 
-## Possible errors - 401
-<list>
-	<li>You don't have permission to do this (leader)</li>
-	<li>You don't have permission to do this (vice leader)</li>
-	<li>You can't downgrade your leader</li>
-</list>
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<include from="error.md" element-id="pvl"/>
+	<include from="error.md" element-id="pl"/>
+	<def title="You can't downgrade your leader">
+		You can not downgrade your guilds leader to vice leader. Executed from vice leaders POV.
+	</def>
+</deflist>
 
-## Possible errors - 404
-<list>
-	<li>Guild doesn't exists</li>
-	<li>Player doesn't exists (leader)</li>
-	<li>Player doesn't exists (vice leader)</li>
-</list>
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="gde"/>
+	<def title="Player doesn't exists (leader)">
+		The entered player does not exist. Threw by new leader.
+	</def>
+	<def title="Player doesn't exists (vice leader)">
+		The entered player does not exist. Threw by new vice leader.
+	</def>
+</deflist>
