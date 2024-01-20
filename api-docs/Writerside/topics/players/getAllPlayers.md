@@ -20,7 +20,7 @@
 	<response type="400">
 		<sample lang="JSON">
 			{
-				"message": "Error message",
+				"message": "Incorrect request",
 				"file": "players.php",
 				"line": 0
 			}
@@ -37,8 +37,15 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Unknown query string parameter <format color="BlueViolet">{$parameter}</format></li>
-	<li>Unknown order parameter <format color="BlueViolet">{$value}</format></li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="uqs"/>
+	<include from="error.md" element-id="uop"/>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<def title="Can't find any players matching conditions">
+		Can't find any players matching parameters in request.
+	</def>
+</deflist>

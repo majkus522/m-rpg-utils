@@ -28,32 +28,7 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<deflist collapsible="true" default-state="collapsed">
-	<def title="Username errors">
-		<list>
-			<li>Enter username</li>
-			<li>Player already exists</li>
-			<li>Username is too short</li>
-			<li>Username is too long</li>
-			<li>Username can only contain letters, numbers and underscore</li>
-		</list>
-	</def>
-	<def title="Email errors">
-		<list>
-			<li>Enter email</li>
-			<li>Email already taken</li>
-			<li>Incorrect email</li>
-		</list>
-	</def>
-	<def title="Password errors">
-		<list>
-			<li>Enter password</li>
-			<li>Password must be at least 6 characters long</li>
-			<li>Password must contain at least one large character</li>
-			<li>Password must contain at least one small character</li>
-			<li>Password must contain at least one number</li>
-			<li>Password must contain at least one special character</li>
-		</list>
-	</def>
-</deflist>
+## HTTP Errors - 400
+<include from="error.md" element-id="usernameErrors">
+<include from="error.md" element-id="emailErrors">
+<include from="error.md" element-id="passwordErrors">

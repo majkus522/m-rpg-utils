@@ -16,3 +16,8 @@
 		</sample>
 	</response>
 </api-endpoint>
+
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+</deflist>

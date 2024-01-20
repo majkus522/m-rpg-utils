@@ -50,3 +50,8 @@
 		</sample>
 	</response>
 </api-endpoint>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+</deflist>

@@ -34,14 +34,28 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter session key</li>
-	<li>Enter session id</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+	<def title="Enter session key">
+		Occurs when there is no Session-Key header in request.
+	</def>
+	<def title="Enter session id">
+		Occurs when there is no Session-ID header in request.
+	</def>
+</deflist>
 
-## Possible errors - 401
-<list>
-	<li>Incorrect player</li>
-	<li>Incorrect session key</li>
-</list>
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<def title="Incorrect player">
+		Session-ID is not bound to entered player.
+	</def>
+	<def title="Incorrect session key">
+		Session-Key is not bound to entered player or session expired.
+	</def>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+</deflist>

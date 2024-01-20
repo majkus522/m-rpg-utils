@@ -25,27 +25,10 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter player</li>
-	<li>Enter some changes</li>
-</list>
-<deflist collapsible="true" default-state="collapsed">
-	<def title="Email errors">
-		<list>
-			<li>Enter email</li>
-			<li>Email already taken</li>
-			<li>Incorrect email</li>
-		</list>
-	</def>
-	<def title="Password errors">
-		<list>
-			<li>Enter password</li>
-			<li>Password must be at least 6 characters long</li>
-			<li>Password must contain at least one large character</li>
-			<li>Password must contain at least one small character</li>
-			<li>Password must contain at least one number</li>
-			<li>Password must contain at least one special character</li>
-		</list>
-	</def>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+	<include from="error.md" element-id="esc"/>
 </deflist>
+<include from="error.md" element-id="emailErrors"/>
+<include from="error.md" element-id="passwordErrors"/>

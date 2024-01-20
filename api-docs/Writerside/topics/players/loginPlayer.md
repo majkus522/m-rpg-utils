@@ -42,8 +42,25 @@
 	</response>
 </api-endpoint>
 
-## Possible errors - 400
-<list>
-	<li>Enter player password</li>
-	<li>Enter session type</li>
-</list>
+## HTTP Errors - 400
+<deflist collapsible="false">
+	<include from="error.md" element-id="ep"/>
+	<def title="Enter player password">
+		Occurs when there is no Password header in the request.
+	</def>
+	<def title="Enter session type">
+		Occurs when there is no Session-Type header in the request.
+	</def>
+</deflist>
+
+## HTTP Errors - 401
+<deflist collapsible="false">
+	<def title="Wrong password">
+		Player password is incorrect.
+	</def>
+</deflist>
+
+## HTTP Errors - 404
+<deflist collapsible="false">
+	<include from="error.md" element-id="pde"/>
+</deflist>
