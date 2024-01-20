@@ -47,12 +47,8 @@
 ## HTTP Errors - 400
 <deflist collapsible="false">
 	<include from="error.md" element-id="ep"/>
-	<def title="Unknown query string parameter {$parameter}">
-		Occurs when the <format color="BlueViolet">{$parameter}</format> is invalid.
-	</def>
-	<def title="Unknown order parameter {$value}">
-		Occurs when the order query string has incorrect value.
-	</def>
+	<include from="error.md" element-id="uqs"/>
+	<include from="error.md" element-id="uop"/>
 	<def title="Incorrect query string (toggle) value">
 		Occurs when the toggle query string has incorrect value.
 	</def>

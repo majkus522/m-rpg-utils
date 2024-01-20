@@ -22,7 +22,7 @@
 	<response type="404">
 		<sample lang="JSON">
 			{
-				"message": "Can't find",
+				"message": "Not found",
 				"file": "fake-status.php",
 				"line": 0
 			}
