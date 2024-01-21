@@ -14,7 +14,10 @@
     </request>
     <response type="201">
 		<sample lang="JSON">
-			1234567890123456789012345678
+			{
+				"key": "0874766202401092016080742134",
+				"id": 0
+			}
 		</sample>
 	</response>
     <response type="400">
