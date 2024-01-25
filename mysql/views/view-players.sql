@@ -13,6 +13,10 @@ CREATE VIEW `view-players` AS SELECT
     `players`.`def` AS `def`,
     `players`.`vtl` AS `vtl`,
     `players`.`dex` AS `dex`,
-    `guilds`.`slug` AS `guild`
+    `guilds`.`slug` AS `guild`,
+    `players`.`helmet` AS `helmet`,
+    `players`.`chestplate` AS `chestplate`,
+    `players`.`leggings` AS `leggings`,
+    `players`.`boots` AS `boots`
 FROM `players`
 LEFT JOIN `guilds` ON `guilds`.`id` = `players`.`guild`;

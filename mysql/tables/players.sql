@@ -16,6 +16,10 @@ CREATE TABLE `players`
   `vtl` int(11) UNSIGNED NOT NULL DEFAULT 1,
   `dex` int(11) UNSIGNED NOT NULL DEFAULT 1,
   `guild` int(11) UNSIGNED NULL DEFAULT NULL,
+  `helmet` varchar(50) NULL DEFAULT NULL,
+  `chestplate` varchar(50) NULL DEFAULT NULL,
+  `leggings` varchar(50) NULL DEFAULT NULL,
+  `boots` varchar(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
