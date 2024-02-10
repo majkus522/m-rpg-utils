@@ -53,6 +53,9 @@
 	<def title="You can't kick guilds leader">
 		As a guilds vice leader you can not kick guilds leader.
 	</def>
+	<def title="First select new leader or vice leader">
+		You can not leave a guild as a guilds leader without anyone to replace you.
+	</def>
 </deflist>
 
 ## HTTP Errors - 404
