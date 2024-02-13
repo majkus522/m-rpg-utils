@@ -1,0 +1,7 @@
+CREATE TABLE `forum-likes`
+(
+  `player` int(11) UNSIGNED NOT NULL,
+  `comment` int(11) UNSIGNED NOT NULL,
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`comment`) REFERENCES `forum`(id) ON DELETE CASCADE ON UPDATE CASCADE
+);

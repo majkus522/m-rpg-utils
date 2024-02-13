@@ -87,6 +87,28 @@ CREATE TABLE `skills`
   FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE `forum`
+(
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `player` int(11) UNSIGNED NOT NULL,
+  `text` text NOT NULL,
+  `master` int(11) UNSIGNED NULL DEFAULT NULL,
+  `title` text NULL,
+  `slug` text NULL,
+  `time` DATETIME NOT NULL DEFAULT now(),
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`master`) REFERENCES `forum`(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `forum-likes`
+(
+  `player` int(11) UNSIGNED NOT NULL,
+  `comment` int(11) UNSIGNED NOT NULL,
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (`comment`) REFERENCES `forum`(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 ALTER TABLE `players` ADD FOREIGN KEY (`guild`) REFERENCES `guilds`(id) ON DELETE SET NULL ON UPDATE CASCADE;
 
 CREATE VIEW `view-players` AS SELECT
