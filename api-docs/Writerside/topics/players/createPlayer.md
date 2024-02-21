@@ -32,6 +32,6 @@
 </api-endpoint>
 
 ## HTTP Errors - 400
-<include from="error.md" element-id="usernameErrors">
-<include from="error.md" element-id="emailErrors">
-<include from="error.md" element-id="passwordErrors">
+<include from="error.md" element-id="usernameErrors"/>
+<include from="error.md" element-id="emailErrors"/>
+<include from="error.md" element-id="passwordErrors"/>
