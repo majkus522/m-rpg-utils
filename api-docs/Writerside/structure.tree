@@ -31,6 +31,13 @@
             <toc-element topic="kickPlayer.md"/>
             <toc-element topic="deleteGuild.md"/>
         </toc-element>
+        <toc-element toc-title="Forum">
+            <toc-element topic="getPosts.md"/>
+            <toc-element topic="getSinglePost.md"/>
+            <toc-element topic="postForum.md"/>
+            <toc-element topic="likeComment.md"/>
+            <toc-element topic="deleteComment.md"/>
+        </toc-element>
         <toc-element toc-title="Password recovery">
             <toc-element topic="send.md"/>
             <toc-element topic="patch.md"/>

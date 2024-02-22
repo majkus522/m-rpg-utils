@@ -714,6 +714,171 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /forum:
+    get:
+      summary: Get forum posts
+      description: Get all posts from forum.
+      parameters:
+        - name: author
+          in: query
+          description: Author of forum post
+          schema:
+            type: string
+        - name: order
+          in: query
+          description: Sort posts
+          schema:
+            type: string
+            enum:
+              - likes
+              - likes-desc
+              - comments
+              - comments-desc
+              - time
+              - time-desc
+        - $ref: '#/components/parameters/Result-Count'
+        - $ref: '#/components/parameters/Result-Offset'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ForumPost'
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create post or comment
+      description: Create a new post or comment an existing post.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForumCreate'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: int
+                    description: Id of a new comment. Appears only if new comment is created.
+                  slug:
+                    type: string
+                    description: Slug of a new post. Appears only if new post is created.
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /forum/{$slug}:
+    get:
+      summary: Get single post
+      description: Get a single post with comments from forum. First element returned is always a master comment (post).
+      parameters:
+        - name: slug
+          in: path
+          description: Slug of post
+          schema:
+            type: string
+        - name: Session-ID
+          in: header
+          description: ID of session
+          required: false
+          schema:
+            type: int
+        - name: Session-Key
+          in: header
+          description: Key of session
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Result-Count'
+        - $ref: '#/components/parameters/Result-Offset'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ForumComment'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Like a comment
+      description: Like a comment.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                like:
+                  type: boolean
+                  description: New value of like.
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a comment
+      description: Delete a comment.
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Incorrect request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   parameters:
     Session-ID:
@@ -935,6 +1100,57 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/MemberType'
+    ForumPost:
+      type: object
+      properties:
+        title:
+          type: string
+        slug:
+          type: string
+        player:
+          type: int
+        time:
+          type: string
+        likes:
+          type: int
+        comments:
+          type: int
+    ForumComment:
+      type: object
+      properties:
+        id:
+          type: int
+        player:
+          type: int
+          description: Author of comment
+        text:
+          type: string
+          description: Content of comment
+        master:
+          type: int
+          description: Shows if comment is subcomponent
+        title:
+          type: string
+          description: Title of post. NULL for comments.
+        likes:
+          type: int
+        time:
+          type: string
+        liked:
+          type: int
+          description: Shows if player has liked a comment. Don't appears if session headers are not send or incorrect.
+    ForumCreate:
+      type: object
+      properties:
+        text:
+          type: int
+          description: Content of post or comment
+        title:
+          type: int
+          description: Title of new post. Required to create a new post.
+        master:
+          type: string
+          description: The master comment of new comment. Required to create a new comment.
     Error:
       type: object
       properties:

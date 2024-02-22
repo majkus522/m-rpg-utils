@@ -96,3 +96,15 @@
 <def title="Unknown order parameter {$value}" id="uop">
 	Occurs when the order query string has incorrect value.
 </def>
+
+<def title="Post doesn't exists" id="f-pde">
+	The entered post does not exist.
+</def>
+
+<def title="Comment or post doesn't exists" id="cpde">
+	Master comment of new comment does not exist.
+</def>
+
+<def title="Enter post or comment" id="epc">
+	Occurs when there is no comment id in url
+</def>
