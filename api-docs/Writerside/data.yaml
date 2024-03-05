@@ -1108,7 +1108,7 @@ components:
         slug:
           type: string
         player:
-          type: int
+          type: string
         time:
           type: string
         likes:
@@ -1121,7 +1121,7 @@ components:
         id:
           type: int
         player:
-          type: int
+          type: string
           description: Author of comment
         text:
           type: string

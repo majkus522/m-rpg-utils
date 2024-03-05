@@ -9,7 +9,7 @@
 				{
 					"title": "Title1",
 					"slug": "slug-1",
-					"player": 2,
+					"player": "username_1",
 					"time": "2024-02-13 19:51:36",
 					"likes": 8,
 					"comments": 6
@@ -17,7 +17,7 @@
 				{
 					"title": "Title2",
 					"slug": "slug-2",
-					"player": 0,
+					"player": "username_2",
 					"time": "2024-02-13 19:59:52",
 					"likes": 0,
 					"comments": 0

@@ -12,7 +12,7 @@
 			[
 				{
 					"id": 1,
-					"player": 2,
+					"player": "username_1",
 					"text": "Lorem Ipsum",
 					"master": null,
 					"title": "title",
@@ -22,7 +22,7 @@
 				},
 				{
 					"id": 2,
-					"player": 0,
+					"player": "username_2",
 					"text": "Lorem Ipsum",
 					"master": 1,
 					"title": null,
@@ -32,13 +32,13 @@
 				},
 				{
 					"id": 3,
-					"player": 7,
+					"player": "username_3",
 					"text": "Lorem Ipsum",
 					"master": 2,
 					"title": null,
 					"likes": 2,
 					"time": "2024-02-13 19:57:36",
-					"liked": 1  // Doesn't appear if session headers are not send or incorrect.
+					"liked": 0  // Doesn't appear if session headers are not send or incorrect.
 				}
 			]
 		</sample>
