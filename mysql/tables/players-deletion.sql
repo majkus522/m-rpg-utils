@@ -1,0 +1,8 @@
+CREATE TABLE `players-deletion`
+(
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `player` int(11) UNSIGNED NOT NULL UNIQUE,
+  `date` DATE NOT NULL,
+  FOREIGN KEY (`player`) REFERENCES `players`(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (`id`)
+);
