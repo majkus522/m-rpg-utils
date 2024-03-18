@@ -750,6 +750,11 @@ paths:
               - time-desc
         - $ref: '#/components/parameters/Result-Count'
         - $ref: '#/components/parameters/Result-Offset'
+        - name: search
+          in: query
+          description: Search for post title
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation
